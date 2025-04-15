@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Form from "./components/form";
-import MoneyTrack from "../src/assets/MoneyTrack.png";
+import Logo from "../src/assets/logoipsum-249.svg";
 import List from "./components/listCard";
 import TotalMoney from "./components/totalMoney";
-import { StyleAPP, BtnsFilter } from "./AppStyles";
 import { ITransaction } from "../src/interfaces/Finances/index";
 import generatePDFReport from "./components/transactions_report";
+import GlobalStyle from "./components/styles/GlobalStyles";
+import Button from "./components/styles/Button";
+import { StyledContainer } from "./components/Pages/StyledContainer ";// Importe o StyledContainer
 
 const App: React.FC = () => {
   const [listTransactions, setListTransactions] = useState<ITransaction[]>([]);
@@ -50,58 +52,61 @@ const App: React.FC = () => {
   const hasTransactions = listTransactions.length > 0;
 
   return (
-    <StyleAPP>
-      <header>
-        <div className="DivHeader">
-          <img className="ImgLogo" alt="Logo MoneyTracker" src={MoneyTrack} />{" "}
-          <button className="BtnBegin" onClick={handleGeneratePDF}>
-            Gerar Relatório
-          </button>
-        </div>
-      </header>
-      <section className="secBarca">
-        <div className="divForm">
-          <Form
-            listTransactions={listTransactions}
-            setListTransactions={setListTransactions}
-          />
-          <TotalMoney listTransactions={listTransactions} />
-        </div>
-        <div className={`divList ${!hasTransactions ? "emptyList" : ""}`}>
-          <div className="DivBtnsFilters">
-            <BtnsFilter
-              active={activeFilter === "all"}
-              onClick={() => setActiveFilter("all")}
-            >
-              Todos
-            </BtnsFilter>
-
-            <BtnsFilter
-              active={activeFilter === "entries"}
-              onClick={() => setActiveFilter("entries")}
-            >
-              Entradas
-            </BtnsFilter>
-
-            <BtnsFilter
-              active={activeFilter === "exits"}
-              onClick={() => setActiveFilter("exits")}
-            >
-              Saídas
-            </BtnsFilter>
+    <>
+      <GlobalStyle />
+      <StyledContainer>
+        <header>
+          <div className="DivHeader">
+            <img className="ImgLogo" alt="Logo MoneyTracker" src={Logo} />
+            <Button className="BtnBegin" onClick={handleGeneratePDF}>
+              Gerar Relatório
+            </Button>
           </div>
-
-          {hasTransactions ? (
-            <List
-              filteredList={filteredList}
-              onDeleteTransaction={handleDeleteTransaction}
+        </header>
+        <section className="secBarca">
+          <div className="divForm">
+            <Form
+              listTransactions={listTransactions}
+              setListTransactions={setListTransactions}
             />
-          ) : (
-            <p>Não há transações</p>
-          )}
-        </div>
-      </section>
-    </StyleAPP>
+            <TotalMoney listTransactions={listTransactions} />
+          </div>
+          <div className={`divList ${!hasTransactions ? "emptyList" : ""}`}>
+            <div className="DivButtons">
+              <Button
+                active={activeFilter === "all"}
+                onClick={() => setActiveFilter("all")}
+              >
+                Todos
+              </Button>
+
+              <Button
+                active={activeFilter === "entries"}
+                onClick={() => setActiveFilter("entries")}
+              >
+                Entradas
+              </Button>
+
+              <Button
+                active={activeFilter === "exits"}
+                onClick={() => setActiveFilter("exits")}
+              >
+                Saídas
+              </Button>
+            </div>
+
+            {hasTransactions ? (
+              <List
+                filteredList={filteredList}
+                onDeleteTransaction={handleDeleteTransaction}
+              />
+            ) : (
+              <p>Não há transações</p>
+            )}
+          </div>
+        </section>
+      </StyledContainer>
+    </>
   );
 };
 

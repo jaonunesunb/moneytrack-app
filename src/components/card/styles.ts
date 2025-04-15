@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 const StyledCard = styled.div`
-  height: 87px;
+  height: auto;
   width: 100%;
   border-radius: 4px;
   background: #f5f5f5;
   display: flex;
   justify-content: space-between;
+  padding: 10px;
 
   .div1 {
-    height: 80%;
-    margin-left: 13px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 
@@ -44,30 +44,30 @@ const StyledCard = styled.div`
     }
 
     img {
-      height: 9.78px;
-      width: 8.56px;
+      height: 10px;
+      width: 10px;
       border-radius: 0px;
     }
   }
 
-  @media (min-width: 769px) {
-    width: 400px;
-
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 8px;
     .maior {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .entradamenor {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .vlor {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     img {
-      height: 10px;
-      width: 9px;
+      height: 8px;
+      width: 8px;
     }
   }
 `;
