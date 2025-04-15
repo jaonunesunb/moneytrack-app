@@ -43,6 +43,9 @@
       "last 1 safari version"
     ]
   },
+    "engines": {
+      "node": "18.x"
+    },
   "devDependencies": {
     "@types/file-loader": "^5.0.1",
     "@types/pdfmake": "^0.2.2",
