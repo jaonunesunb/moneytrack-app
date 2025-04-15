@@ -7,7 +7,7 @@ import { ITransaction } from "../src/interfaces/Finances/index";
 import generatePDFReport from "./components/transactions_report";
 import GlobalStyle from "./components/styles/GlobalStyles";
 import Button from "./components/styles/Button";
-import { StyledContainer } from "./components/Pages/StyledContainer ";// Importe o StyledContainer
+import { StyledContainer } from "./components/Pages/StyledContainer ";
 
 const App: React.FC = () => {
   const [listTransactions, setListTransactions] = useState<ITransaction[]>([]);
@@ -52,9 +52,8 @@ const App: React.FC = () => {
   const hasTransactions = listTransactions.length > 0;
 
   return (
-    <>
-      <GlobalStyle />
       <StyledContainer>
+         <GlobalStyle />
         <header>
           <div className="DivHeader">
             <img className="ImgLogo" alt="Logo MoneyTracker" src={Logo} />
@@ -106,7 +105,6 @@ const App: React.FC = () => {
           </div>
         </section>
       </StyledContainer>
-    </>
   );
 };
 

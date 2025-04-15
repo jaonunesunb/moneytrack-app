@@ -1,6 +1,6 @@
 import React from "react";
-import StyledCard from "./styles";
-import Trash from "../../assets/trash.png"
+import { StyledCard, StyledTrashButton } from "./styles";
+import Trash from "../../assets/trash.png";
 
 import { ITransaction } from "../../interfaces/Finances";
 
@@ -16,18 +16,16 @@ const Card: React.FC<CardProps> = ({ transaction, onDeleteTransaction }) => {
 
   return (
     <StyledCard>
-      <div className="div1">
-        <p className="maior">{transaction.description}</p>
-        <p className="entradamenor">{transaction.type}</p>
+      <div className="content">
+        <p className="description">{transaction.description}</p>
+        <p className="type">{transaction.type}</p>
       </div>
-      <div className="div2">
-        <p className="vlor">R${transaction.value}</p>
+      <div className="value">
+        <p>R${transaction.value}</p>
       </div>
-      <div className="divIMGBTN">
-        <button onClick={handleDeleteTransaction}>
-          <img src={Trash} alt="Deletar" />
-        </button>
-      </div>
+      <StyledTrashButton onClick={handleDeleteTransaction}>
+        <img src={Trash} alt="Deletar" />
+      </StyledTrashButton>
     </StyledCard>
   );
 };

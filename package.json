@@ -13,6 +13,7 @@
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-input-mask": "^2.0.4",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
     "vercel": "^29.4.0",
@@ -43,12 +44,13 @@
       "last 1 safari version"
     ]
   },
-    "engines": {
-      "node": "20.x"
-    },
+  "engines": {
+    "node": "20.x"
+  },
   "devDependencies": {
     "@types/file-loader": "^5.0.1",
     "@types/pdfmake": "^0.2.2",
+    "@types/react-input-mask": "^3.0.6",
     "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",

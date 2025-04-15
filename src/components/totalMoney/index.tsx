@@ -20,10 +20,11 @@ const TotalMoney: React.FC<TotalMoneyProps> = ({ listTransactions }) => {
     },
     saldoInicial
   );
+
   const saldoClassName = valorTotal < 0 ? "valorTotal_negative" : "valorTotal";
   return (
     <StyledMoney>
-      <div>
+      <div className="content">
         <p>Valor total:</p>
         <p className="saldoText">O valor se refere ao saldo disponível</p>
       </div>

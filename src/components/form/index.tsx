@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import * as yup from "yup";
+import React, { useState, useEffect, useRef } from "react";
 import { StyledForm } from "./styles";
+import InputMask from "react-input-mask";
+import * as yup from "yup";
 import { ITransaction } from "../../interfaces/Finances";
 import { transactionSchema } from "../../schemas/transactions.schema";
 
@@ -20,6 +21,10 @@ const Form: React.FC<FormProps> = ({
     type: "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const descriptionRef = useRef<HTMLInputElement>(null);
+  const valueRef = useRef<HTMLInputElement>(null);
+  const typeRef = useRef<HTMLSelectElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,7 +50,7 @@ const Form: React.FC<FormProps> = ({
       .catch((error: yup.ValidationError) => {
         const validationErrors: { [key: string]: string } = {};
         error.inner.forEach((err: yup.ValidationError) => {
-          validationErrors[errors.path] = err.message;
+          validationErrors[err.path as string] = err.message;
         });
         setErrors(validationErrors);
       });
@@ -72,6 +77,7 @@ const Form: React.FC<FormProps> = ({
       <div>
         <p>Descrição</p>
         <input
+          ref={descriptionRef}
           className="inputDescription"
           type="text"
           name="description"
@@ -84,17 +90,19 @@ const Form: React.FC<FormProps> = ({
         <p>Ex: Compra de roupas</p>
       </div>
       <div className="divInputValor">
-        <input
-          type="number"
-          name="value"
-          value={transaction.value}
+      <label htmlFor="value">Valor</label>
+      <InputMask
+          mask="R$ 9999,99"
+          value={transaction.value || ""}
           onChange={handleInputChange}
-          placeholder="valor"
+          name="value"
+          placeholder="R$ 0,00"
           required
-          min={0}
         />
         {errors.value && <p className="error">{errors.value}</p>}
+        <label htmlFor="type">Tipo de Transação</label>
         <select
+          ref={typeRef}
           name="type"
           value={transaction.type}
           onChange={handleInputChange}

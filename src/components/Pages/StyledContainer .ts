@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   width: 100%;
-  max-width: 1200px; /* Largura máxima do conteúdo */
-  margin: 0 auto; /* Centraliza o conteúdo */
-  padding: 20px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   padding-top: 0;
@@ -14,11 +12,11 @@ export const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between; /* Alinha logo e botão de relatório */
     align-items: center;
-    background-color: #007bff; /* Cor de fundo do header */
+    background-color: #6a4c9c; /* Tom roxo suave */
     padding: 20px; /* Espaçamento interno do header */
-    border-radius: 8px; /* Borda arredondada para o header */
-    margin-top: 0; /* Remover qualquer margem no topo */
-    width: 100%;
+    margin-top: 0;
+    width: 100%; /* Cabeçalho ocupa toda a largura da tela */
+    box-sizing: border-box; /* Certificar que o box-sizing seja aplicado ao header */
   }
 
   /* Estilo do divHeader */
@@ -26,29 +24,30 @@ export const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%; /* Garante que divHeader ocupe 100% do espaço disponível */
-    margin: 0; /* Remove qualquer margem extra */
-    padding: 0; /* Remove qualquer padding extra */
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   /* Estilo da logo */
   .ImgLogo {
-    max-width: 250px; /* Definir um tamanho máximo para a logo */
+    max-width: 200px; /* Ajusta o tamanho máximo da logo */
     height: auto;
+    margin-left: 40px;
   }
 
   /* Estilo do botão */
   .BtnBegin {
     background-color: #ffffff;
-    color: #007bff;
+    color: #6a4c9c; /* Cor da fonte do botão */
     padding: 10px 20px;
     border-radius: 8px;
-    border: 1px solid #007bff;
+    border: 1px solid #6a4c9c; /* Cor da borda do botão */
     cursor: pointer;
     transition: all 0.3s;
 
     &:hover {
-      background-color: #007bff;
+      background-color: #6a4c9c;
       color: white;
     }
   }
@@ -61,12 +60,12 @@ export const StyledContainer = styled.div`
     gap: 20px;
 
     .DivButtons {
-      display: flex; /* Flexbox para botões ficarem em linha */
-      gap: 10px; /* Espaço entre os botões */
-      flex-direction: row; /* Organiza os botões em linha */
-      flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte se necessário */
-      width: 100%; /* Botões ocupam 100% da largura disponível */
-      justify-content: flex-start; /* Alinha os botões à esquerda */
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: flex-start;
     }
 
     .divList {
@@ -74,15 +73,15 @@ export const StyledContainer = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
-      width: 100%; /* Lista ocupa 100% da largura disponível */
+      width: 100%;
     }
   }
 
   .divForm {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     width: 100%;
+    align-items: center;
   }
 
   /* Ajustes responsivos */

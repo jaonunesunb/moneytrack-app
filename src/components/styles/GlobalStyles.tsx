@@ -1,12 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap');
-
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Aplica box-sizing: border-box a todos os elementos */
   }
 
   body, html {
@@ -19,21 +17,8 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     display: flex;
     flex-direction: column;
-  }
-
-  header {
-    margin: 0; /* Remover margem superior no header */
-    padding: 0; /* Garantir que o padding também seja zero */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  #root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+    margin: 0; /* Remove qualquer margem no body */
+    padding: 0; /* Remove qualquer padding no body */
   }
 
   h1, h2, h3 {

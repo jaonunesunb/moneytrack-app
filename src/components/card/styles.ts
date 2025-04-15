@@ -1,75 +1,88 @@
 import styled from "styled-components";
 
-const StyledCard = styled.div`
-  height: auto;
+export const StyledCard = styled.div`
   width: 100%;
+  max-width: 320px;
+  background-color: #f5f5f5;
   border-radius: 4px;
-  background: #f5f5f5;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-
-  .div1 {
-    flex-grow: 1;
+  align-items: center;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  
+  /* Conteúdo do cartão */
+  .content {
     display: flex;
     flex-direction: column;
-
-    .maior {
-      font-family: "Nunito";
+    justify-content: space-between;
+    flex-grow: 1;
+    
+    .description {
+      font-family: "Nunito", sans-serif;
       font-weight: 700;
       font-size: 18px;
       color: #212529;
     }
 
-    .entradamenor {
-      font-family: "Nunito";
+    .type {
+      font-family: "Nunito", sans-serif;
       font-weight: 400;
       font-size: 14px;
       color: #343a40;
     }
   }
 
-  .div2 {
-    .vlor {
-      font-family: "Nunito";
+  /* Valor do cartão */
+  .value {
+    p {
+      font-family: "Nunito", sans-serif;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 16px;
       color: #212529;
     }
   }
 
-  .divIMGBTN {
-    button {
-      margin-top: 15px;
-    }
-
-    img {
-      height: 10px;
-      width: 10px;
-      border-radius: 0px;
-    }
+  /* Estilos do botão de exclusão */
+  .trash-button {
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
   }
 
+  /* Responsividade */
   @media (max-width: 768px) {
-    width: 100%;
     padding: 8px;
-    .maior {
+    
+    .description {
       font-size: 16px;
     }
 
-    .entradamenor {
+    .type {
       font-size: 12px;
     }
 
-    .vlor {
-      font-size: 12px;
-    }
-
-    img {
-      height: 8px;
-      width: 8px;
+    .value p {
+      font-size: 14px;
     }
   }
 `;
 
-export default StyledCard;
+export const StyledTrashButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  
+  img {
+    height: 16px;
+    width: 16px;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+`;
