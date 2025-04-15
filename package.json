@@ -44,7 +44,7 @@
     ]
   },
     "engines": {
-      "node": "18.x"
+      "node": "20.x"
     },
   "devDependencies": {
     "@types/file-loader": "^5.0.1",
