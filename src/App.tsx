@@ -100,7 +100,7 @@ const App: React.FC = () => {
                 onDeleteTransaction={handleDeleteTransaction}
               />
             ) : (
-              <p>Não há transações</p>
+              <div className="emptyList">Não há transações</div>
             )}
           </div>
         </section>

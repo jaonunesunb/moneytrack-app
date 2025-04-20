@@ -12,7 +12,7 @@ const List: React.FC<ListProps> = ({ filteredList, onDeleteTransaction }) => {
   return (
     <StyledList>
       {filteredList.length === 0 ? (
-        <div className="emptyList">Não há transações</div>
+        <div className={`emptyList ${filteredList.length === 0 ? "emptyListFiltered" : ""}`}>Não há transações</div>
       ) : (
         <ul>
           {filteredList.map((transaction: ITransaction) => (

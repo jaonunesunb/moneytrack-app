@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { StyledForm } from "./styles";
-import InputMask from "react-input-mask";
+import { NumericFormat } from "react-number-format"; // Importando o NumberFormat
 import * as yup from "yup";
 import { ITransaction } from "../../interfaces/Finances";
 import { transactionSchema } from "../../schemas/transactions.schema";
@@ -17,15 +17,12 @@ const Form: React.FC<FormProps> = ({
   const [transaction, setTransaction] = useState<ITransaction>({
     id: "",
     description: "",
-    value: 0,
+    value: 0, // Guardando o valor como número
     type: "",
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const descriptionRef = useRef<HTMLInputElement>(null);
-  const valueRef = useRef<HTMLInputElement>(null);
-  const typeRef = useRef<HTMLSelectElement>(null);
-
+  // Função de submit do formulário
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -35,14 +32,14 @@ const Form: React.FC<FormProps> = ({
         const newTransaction: ITransaction = {
           id: generateId(),
           description: transaction.description,
-          value: transaction.value,
+          value: transaction.value, // Valor já é um número
           type: transaction.type,
         };
         setListTransactions([newTransaction, ...listTransactions]);
         setTransaction({
           id: newTransaction.id,
           description: "",
-          value: 0,
+          value: 0, // Resetando para número
           type: "",
         });
         setErrors({});
@@ -60,7 +57,11 @@ const Form: React.FC<FormProps> = ({
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
-    const parsedValue = name === "value" ? parseFloat(value) : value;
+    let parsedValue: number | string = value;
+    if (name === "value") {
+      parsedValue = parseFloat(value.replace("R$", "").replace(",", "."));
+      parsedValue = isNaN(parsedValue) ? 0 : parsedValue;
+    }
 
     setTransaction((prevState) => ({
       ...prevState,
@@ -77,7 +78,6 @@ const Form: React.FC<FormProps> = ({
       <div>
         <p>Descrição</p>
         <input
-          ref={descriptionRef}
           className="inputDescription"
           type="text"
           name="description"
@@ -90,19 +90,20 @@ const Form: React.FC<FormProps> = ({
         <p>Ex: Compra de roupas</p>
       </div>
       <div className="divInputValor">
-      <label htmlFor="value">Valor</label>
-      <InputMask
-          mask="R$ 9999,99"
+        <label htmlFor="value">Valor</label>
+        <input
+          type="number"
+          name="value"
           value={transaction.value || ""}
           onChange={handleInputChange}
-          name="value"
           placeholder="R$ 0,00"
+          min="0"
+          step="0.01"
           required
         />
         {errors.value && <p className="error">{errors.value}</p>}
         <label htmlFor="type">Tipo de Transação</label>
         <select
-          ref={typeRef}
           name="type"
           value={transaction.type}
           onChange={handleInputChange}
