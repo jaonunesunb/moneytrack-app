@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 export const StyledCard = styled.div`
   width: 100%;
-  max-width: 320px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  padding: 10px;
+  max-width: 400px;
+  background-color: var(--card-bg-color);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
   box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   
   /* Conteúdo do cartão */
   .content {
@@ -23,14 +25,15 @@ export const StyledCard = styled.div`
       font-family: "Nunito", sans-serif;
       font-weight: 700;
       font-size: 18px;
-      color: #212529;
+      color: var(--text-color);
     }
 
     .type {
       font-family: "Nunito", sans-serif;
       font-weight: 400;
       font-size: 14px;
-      color: #343a40;
+      color: var(--text-color);
+      opacity: 0.8;
     }
   }
 
@@ -40,7 +43,7 @@ export const StyledCard = styled.div`
       font-family: "Nunito", sans-serif;
       font-weight: 400;
       font-size: 16px;
-      color: #212529;
+      color: var(--text-color);
     }
   }
 

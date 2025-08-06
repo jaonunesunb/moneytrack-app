@@ -49,8 +49,6 @@ const App: React.FC = () => {
     localStorage.setItem("listTransactions", JSON.stringify(listTransactions));
   }, [listTransactions]);
 
-  const hasTransactions = listTransactions.length > 0;
-
   return (
       <StyledContainer>
          <GlobalStyle />
@@ -70,8 +68,8 @@ const App: React.FC = () => {
             />
             <TotalMoney listTransactions={listTransactions} />
           </div>
-          <div className={`divList ${!hasTransactions ? "emptyList" : ""}`}>
-            <div className="DivButtons">
+          <div className="divList">
+            <div className={`DivButtons ${filteredList.length > 0 ? "aligned" : ""}`}>
               <Button
                 active={activeFilter === "all"}
                 onClick={() => setActiveFilter("all")}
@@ -94,7 +92,7 @@ const App: React.FC = () => {
               </Button>
             </div>
 
-            {hasTransactions ? (
+             {filteredList.length > 0 ? (
               <List
                 filteredList={filteredList}
                 onDeleteTransaction={handleDeleteTransaction}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyledForm } from "./styles";
-import { NumericFormat } from "react-number-format"; // Importando o NumberFormat
+import { NumericFormat } from "react-number-format";
 import * as yup from "yup";
 import { ITransaction } from "../../interfaces/Finances";
 import { transactionSchema } from "../../schemas/transactions.schema";
@@ -17,12 +17,12 @@ const Form: React.FC<FormProps> = ({
   const [transaction, setTransaction] = useState<ITransaction>({
     id: "",
     description: "",
-    value: 0, // Guardando o valor como número
+    value: 0,
     type: "",
   });
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  // Função de submit do formulário
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -32,22 +32,22 @@ const Form: React.FC<FormProps> = ({
         const newTransaction: ITransaction = {
           id: generateId(),
           description: transaction.description,
-          value: transaction.value, // Valor já é um número
+          value: transaction.value,
           type: transaction.type,
         };
         setListTransactions([newTransaction, ...listTransactions]);
         setTransaction({
-          id: newTransaction.id,
+          id: "",
           description: "",
-          value: 0, // Resetando para número
+          value: 0,
           type: "",
         });
         setErrors({});
       })
       .catch((error: yup.ValidationError) => {
         const validationErrors: { [key: string]: string } = {};
-        error.inner.forEach((err: yup.ValidationError) => {
-          validationErrors[err.path as string] = err.message;
+        error.inner.forEach((err) => {
+          if (err.path) validationErrors[err.path] = err.message;
         });
         setErrors(validationErrors);
       });
@@ -57,20 +57,14 @@ const Form: React.FC<FormProps> = ({
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
-    let parsedValue: number | string = value;
-    if (name === "value") {
-      parsedValue = parseFloat(value.replace("R$", "").replace(",", "."));
-      parsedValue = isNaN(parsedValue) ? 0 : parsedValue;
-    }
-
     setTransaction((prevState) => ({
       ...prevState,
-      [name]: parsedValue,
+      [name]: value,
     }));
   }
 
   function generateId(): string {
-    return Math.random().toString(36).substring(7);
+    return Math.random().toString(36).substring(2, 9);
   }
 
   return (
@@ -89,19 +83,30 @@ const Form: React.FC<FormProps> = ({
         {errors.description && <p className="error">{errors.description}</p>}
         <p>Ex: Compra de roupas</p>
       </div>
+
       <div className="divInputValor">
         <label htmlFor="value">Valor</label>
-        <input
-          type="number"
+        <NumericFormat
           name="value"
           value={transaction.value || ""}
-          onChange={handleInputChange}
+          onValueChange={(values) => {
+            const { floatValue } = values;
+            setTransaction((prev) => ({
+              ...prev,
+              value: floatValue || 0,
+            }));
+          }}
+          thousandSeparator="."
+          decimalSeparator=","
+          decimalScale={2}
+          fixedDecimalScale
+          prefix="R$ "
+          allowNegative={false}
           placeholder="R$ 0,00"
-          min="0"
-          step="0.01"
-          required
+          className="inputValue"
         />
         {errors.value && <p className="error">{errors.value}</p>}
+
         <label htmlFor="type">Tipo de Transação</label>
         <select
           name="type"
@@ -115,6 +120,7 @@ const Form: React.FC<FormProps> = ({
         </select>
         {errors.type && <p className="error">{errors.type}</p>}
       </div>
+
       <button type="submit">Inserir valor</button>
     </StyledForm>
   );

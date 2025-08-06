@@ -66,6 +66,7 @@ export const StyledContainer = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    width: 100%;
   }
 
 
@@ -94,6 +95,11 @@ export const StyledContainer = styled.div`
       width: 100%;
     }
   }
+
+  .DivButtons.aligned {
+      max-width: 400px;
+      margin: 0 auto;
+    }
 
   .divForm {
     display: flex;

@@ -5,8 +5,9 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>`
-  background-color: ${(props) => (props.active ? '#0078d4' : '#f0f0f0')};
-  color: ${(props) => (props.active ? 'white' : 'black')};
+  background-color: ${(props) =>
+    props.active ? 'var(--primary-color)' : 'var(--button-bg)'};
+  color: ${(props) => (props.active ? 'white' : 'var(--text-color)')};
   padding: 10px 20px;
   border-radius: 8px;
   border: none;
@@ -15,7 +16,8 @@ const Button = styled.button<ButtonProps>`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${(props) => (props.active ? '#005a99' : '#eaeaea')};
+     background-color: ${(props) =>
+      props.active ? 'var(--primary-color-hover)' : 'var(--button-hover-bg)'};
   }
 
   &:focus {

@@ -1,6 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+:root {
+    --primary-color: #0078d4;
+    --primary-color-hover: #005a99;
+    --background-color: #f4f7fa;
+    --text-color: #333;
+    --card-bg-color: #ffffff;
+    --button-bg: #f0f0f0;
+    --button-hover-bg: #eaeaea;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -11,8 +21,8 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f7fa;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: flex;
@@ -28,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     font-family: 'Roboto', sans-serif;
-    background-color: #0078d4;
+    background-color: var(--primary-color);
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
@@ -37,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button:hover {
-    background-color: #005a99;
+    background-color: var(--primary-color-hover);
   }
 
   input, select, textarea {
@@ -49,7 +59,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input:focus, select:focus, textarea:focus {
-    border-color: #0078d4;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3);
   }
 `;
